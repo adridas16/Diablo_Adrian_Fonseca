@@ -12,5 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aef420008c47fd842a6d1d47fe7ecab7, type: 3}
   m_Name: Dialogo1
   m_EditorClassIdentifier: 
-  frases: []
-  tiempoEntreLetras: 0
+  frases:
+  - "Hello there adventurer and welcome\t"
+  - General kenobi you are telling me i am a adventurer?
+  - Do you like mondongos? what about a banana? What else you are an extrange person
+  tiempoEntreLetras: 1
