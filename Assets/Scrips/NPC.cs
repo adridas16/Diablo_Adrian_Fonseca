@@ -6,7 +6,7 @@ using UnityEngine;
 public class NPC : MonoBehaviour
 {
     // Start is called before the first frame update
-  
+    [SerializeField] private DialogaSO dialogo;
     private Outline outline;
     [SerializeField]private Texture2D cursorNPC;
     [SerializeField]private Texture2D cursorIdl;
@@ -29,14 +29,18 @@ public class NPC : MonoBehaviour
     }
     public void Interactuar(Transform interactuador)
     {
-        Debug.Log("hola");
-        transform.DOLookAt(interactuador.position, tiempoRotacion,AxisConstraint.Y);
+        transform.DOLookAt(interactuador.position, tiempoRotacion,AxisConstraint.Y).OnComplete(() => SistemaDialogo.sistema.IniciarDialogo(dialogo));
+
     }
+
+
     private void OnMouseEnter()
     {
         Cursor.SetCursor(cursorNPC, Vector2.zero, CursorMode.Auto);
         outline.enabled = true;       
     }
+
+
     private void OnMouseExit()
     {
         Cursor.SetCursor(cursorIdl, Vector2.zero, CursorMode.Auto);
