@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor;
 using UnityEngine;
 
 public class SistemaDialogo : MonoBehaviour
@@ -11,11 +12,12 @@ public class SistemaDialogo : MonoBehaviour
     public static SistemaDialogo sistema;
     [SerializeField] private GameObject marcos;
     [SerializeField] private TMP_Text textoDialogo;
+    private DialogaSO dialogoActual; //para almacenar que o con que dialogo estamos trabajando
 
 
     private bool escribiendo; //Determina si el sistema esta escribiendo o no
     private int indiceFraseActual;//Marca la frase por la que voy 
-
+    
 
     
 
@@ -38,30 +40,61 @@ public class SistemaDialogo : MonoBehaviour
 
     public void IniciarDialogo(DialogaSO dialogo)
     {
-
+        Time.timeScale = 0; //pausamos el juego
+        //el dialogo actual con el que trabajamos es el que me dan por parametro de entrada
+        dialogoActual = dialogo;
         marcos.SetActive(true);
+        StartCoroutine(EscribirFrase());
  
     }
 
-    private void EscribirFrase()
+    private  IEnumerator EscribirFrase()
     {
-
+        escribiendo = true;
+        textoDialogo.text = "";
+        char[]fraseEnLetras = dialogoActual.frases[indiceFraseActual].ToCharArray();
+        foreach (char letra in fraseEnLetras) 
+        {
+            textoDialogo.text += letra;
+            
+            yield return new WaitForSecondsRealtime(dialogoActual.tiempoEntreLetras);
+        }
+        escribiendo = false;
     }
-
+    public void SiguienteFrase()
+    {
+        if (escribiendo)//si estamos escribiendo una frase...
+        {
+            CompletarFrase();
+        }
+        else
+        {
+            indiceFraseActual++;//avanzo de indice de frase 
+            if(indiceFraseActual < dialogoActual.frases.Length)
+            {
+               StartCoroutine(EscribirFrase()); //la escribe
+            }
+            else
+            {
+                TerminarDialogo();//si no me quedan frases termino y cierro dialogo
+            }
+        }
+      
+    }
+    private void CompletarFrase()
+    {
+        StopAllCoroutines();
+        textoDialogo.text = dialogoActual.frases[indiceFraseActual];
+        escribiendo=false;
+    }
     private void TerminarDialogo()
     {
-
-
-
+        marcos.SetActive(false);
+        StopAllCoroutines();
+        indiceFraseActual = 0;//para posteriores dialogos
+        escribiendo = false;
+        dialogoActual = null;//ya no tenemos ningun dialogo a no ser que me vuelvan a clicar
+        Time.timeScale = 1;
     }
-
-   
-    private void SiguienteFrase()
-    {
-
-    }
-
-    
-
 
 }

@@ -16,4 +16,4 @@ MonoBehaviour:
   - "Hello there adventurer and welcome\t"
   - General kenobi you are telling me i am a adventurer?
   - Do you like mondongos? what about a banana? What else you are an extrange person
-  tiempoEntreLetras: 1
+  tiempoEntreLetras: 0.02

@@ -12,7 +12,7 @@ public class Player : MonoBehaviour
     private NavMeshAgent agent;
     private Camera cam;
     //Guardo la informacion del NPC actual con el que voy a hablar
-    private NPC npcActual;
+    private Transform ultimoClick;
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -28,16 +28,19 @@ public class Player : MonoBehaviour
     void Update()
     {
         Movimiento();
-        if (npcActual)
+        if (ultimoClick&& ultimoClick.TryGetComponent(out NPC npc))
         {
+            agent.stoppingDistance=distanciaInteraccion;
             if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
             {
-                npcActual.Interactuar(this.transform);
-                npcActual = null;
-                agent.isStopped = true;
-                agent.stoppingDistance = 0;
+                npc.Interactuar(this.transform);
+                ultimoClick = null;
                 
             }
+        }
+        else if(ultimoClick)
+        {
+            agent.stoppingDistance = 0f;    
         }
        
     }
@@ -45,20 +48,18 @@ public class Player : MonoBehaviour
     private void Movimiento()
     {
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-
-        if (Physics.Raycast(ray, out RaycastHit hit))
+        if (Time.timeScale == 1)
         {
-            if (Input.GetMouseButtonDown(0))
+            if (Physics.Raycast(ray, out RaycastHit hit))
             {
-                if (hit.transform.TryGetComponent(out NPC npc))
+                if (Input.GetMouseButtonDown(0))
                 {
-                    //En ese caso ese npc es el actual.
-                    npcActual = npc;
-                    //Ahora mi distancia de parada es la de interaccion     
-                    agent.stoppingDistance = distanciaInteraccion;
-                }
-                //Mirrar a ver si el punto donde e impactado tiene el script NPC
-                agent.SetDestination(hit.point);
+               
+                  //Mirrar a ver si el punto donde e impactado tiene el script NPC
+                  agent.SetDestination(hit.point);
+                  ultimoClick=hit.transform;
+                } 
+
             }
 
         }
