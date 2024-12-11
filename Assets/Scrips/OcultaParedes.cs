@@ -16,4 +16,14 @@ public class OcultaParedes : MonoBehaviour
             }
         }
     }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            foreach (Renderer pared in paredes)
+            {
+               pared.enabled = true;
+            }
+        }
+    }
 }
