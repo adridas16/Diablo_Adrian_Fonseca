@@ -11,6 +11,7 @@ public class NPC : MonoBehaviour
     [SerializeField]private Texture2D cursorNPC;
     [SerializeField]private Texture2D cursorIdl;
     [SerializeField]float tiempoRotacion;
+    [SerializeField] private Transform cameraPoint;
     //Antes del start() (una vez)
     //2 Este o no este el script habilitado,el Awake se lanza ,el Start NO. Para tus componentes 
     private void Awake()
@@ -29,7 +30,7 @@ public class NPC : MonoBehaviour
     }
     public void Interactuar(Transform interactuador)
     {
-        transform.DOLookAt(interactuador.position, tiempoRotacion,AxisConstraint.Y).OnComplete(() => SistemaDialogo.sistema.IniciarDialogo(dialogo));
+        transform.DOLookAt(interactuador.position, tiempoRotacion,AxisConstraint.Y).OnComplete(() => SistemaDialogo.sistema.IniciarDialogo(dialogo, cameraPoint));
 
     }
 

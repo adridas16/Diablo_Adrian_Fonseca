@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -11,6 +12,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float distanciaInteraccion;
     private NavMeshAgent agent;
     private Camera cam;
+    [SerializeField]private int tiempoInteraccion;
     //Guardo la informacion del NPC actual con el que voy a hablar
     private Transform ultimoClick;
     private void Awake()
@@ -33,8 +35,11 @@ public class Player : MonoBehaviour
             agent.stoppingDistance=distanciaInteraccion;
             if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
             {
-                npc.Interactuar(this.transform);
-                ultimoClick = null;
+              LanzarInteraccion(npc);
+                
+                    
+                
+                
                 
             }
         }
@@ -44,7 +49,11 @@ public class Player : MonoBehaviour
         }
        
     }
-
+    private void LanzarInteraccion(NPC npc)
+    {
+        npc.Interactuar(this.transform);
+        ultimoClick = null;
+    }
     private void Movimiento()
     {
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
