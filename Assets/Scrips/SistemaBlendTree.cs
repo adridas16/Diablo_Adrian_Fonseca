@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
 
-public class PlayerVisual : MonoBehaviour
+public class SistemaBlendTree : MonoBehaviour
 {
 
     [SerializeField] private NavMeshAgent agent;

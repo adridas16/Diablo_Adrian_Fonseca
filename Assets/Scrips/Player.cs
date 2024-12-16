@@ -35,11 +35,9 @@ public class Player : MonoBehaviour
             agent.stoppingDistance=distanciaInteraccion;
             if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
             {
+                
               LanzarInteraccion(npc);
-                
-                    
-                
-                
+
                 
             }
         }
