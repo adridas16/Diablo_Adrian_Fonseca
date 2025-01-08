@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class SistemaPatruya : MonoBehaviour
+public class SistemaPatrulla : MonoBehaviour
 {
+    [SerializeField] private Enemigo main;
     [SerializeField] private Transform ruta;
+
     List<Vector3> listadoPuntos = new List<Vector3>();
+
     [SerializeField] private NavMeshAgent agent;
     private Vector3 destinoActual; //Marca el destino al cual tenemos que ir
     private int indiceRutaActual=-1;
@@ -14,6 +17,7 @@ public class SistemaPatruya : MonoBehaviour
     // Start is called before the first frame update
     private void Awake()
     {
+        main.Patrulla = this;
        
         //voy recorriendo todos los puntos que tiene mi ruta
         foreach (Transform punto in ruta)
@@ -24,6 +28,7 @@ public class SistemaPatruya : MonoBehaviour
     }
     void Start()
     {
+        //comunico al main que el sistema de patruya soy yo
         StartCoroutine(PatrullasYEsperar());
 
     }
@@ -53,11 +58,14 @@ public class SistemaPatruya : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.CompareTag("Player"))
         {
-            StopAllCoroutines();
-         
+            StopAllCoroutines(); //paro corrutinas
+            main.ActivaCombate(other.transform);
+      
+            this.enabled = false;//desabilito patruya
         }
     }
+    
 
 }
