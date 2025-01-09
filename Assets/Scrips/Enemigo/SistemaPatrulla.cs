@@ -7,12 +7,13 @@ public class SistemaPatrulla : MonoBehaviour
 {
     [SerializeField] private Enemigo main;
     [SerializeField] private Transform ruta;
+    private float velocidadPatruya = 3;
 
     List<Vector3> listadoPuntos = new List<Vector3>();
 
     [SerializeField] private NavMeshAgent agent;
     private Vector3 destinoActual; //Marca el destino al cual tenemos que ir
-    private int indiceRutaActual=-1;
+    private int indiceRutaActual;
     private float tiempoEntrePuntos;//Marca el indice del nuevo punto
     // Start is called before the first frame update
     private void Awake()
@@ -28,9 +29,15 @@ public class SistemaPatrulla : MonoBehaviour
     }
     void Start()
     {
+
+    }
+    private void OnEnable()
+    {
+        indiceRutaActual = 0;
+        agent.speed = velocidadPatruya;
         //comunico al main que el sistema de patruya soy yo
         StartCoroutine(PatrullasYEsperar());
-
+        
     }
 
     private IEnumerator PatrullasYEsperar()

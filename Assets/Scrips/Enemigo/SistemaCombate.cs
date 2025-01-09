@@ -1,16 +1,17 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.Playables;
-using UnityEngine.UI;
 
 public class SistemaCombate : MonoBehaviour
 {
     [SerializeField] private Enemigo main;
-    [SerializeField]private float velocidadCombate = 4.5f;
+    [SerializeField] private float velocidadCombate = 4.5f;
     [SerializeField] NavMeshAgent agent;
-    [SerializeField]private float distanciaAtaque = 1.5f; 
+    [SerializeField] private float distanciaAtaque = 1.5f; 
+    [SerializeField] private Animator animator;
+    
 
     // Start is called before the first frame update
 
@@ -32,8 +33,32 @@ public class SistemaCombate : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
 
-        agent.SetDestination(main.MainTarjet.position);
+        //si el tarjet es alcanzable voy a por el 
+        if (main.MainTarjet != null && agent.CalculatePath(main.MainTarjet.position, new NavMeshPath()))
+        {
+            EnfocarObjetivo();
+            agent.SetDestination(main.MainTarjet.position);
+            if (agent.remainingDistance <= distanciaAtaque) 
+            { 
+                animator.SetBool("Atacar",true);
+                main.MainVisual.Atacar();
+            }
+
+        }
+        else//si no es alcanzable
+        {
+            main.ActivarPatruya();
+            
+        }
     }
+
+    private void EnfocarObjetivo()
+    {
+        Vector3 direccionAlTarjet=(main.MainTarjet.position-this.transform.position).normalized;
+        direccionAlTarjet.y=0;
+        Quaternion rotacionAlTarjet =Quaternion.LookRotation(direccionAlTarjet);
+        transform.rotation = rotacionAlTarjet;
+    }
+    
 }

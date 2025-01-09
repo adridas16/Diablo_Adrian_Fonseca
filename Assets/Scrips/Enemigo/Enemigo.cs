@@ -9,11 +9,13 @@ public class Enemigo : MonoBehaviour
 {
     private SistemaCombate combate;
     private SistemaPatrulla patrulla;
-    private Transform mainTarjet;
+     Transform mainTarjet;
+    EnemyVisual mainVisual;
 
     public SistemaCombate Combate { get => combate; set => combate = value; }
     public SistemaPatrulla Patrulla { get => patrulla; set => patrulla = value; }
     public Transform MainTarjet { get => mainTarjet; }
+    public EnemyVisual MainVisual { get => mainVisual; set => mainVisual = value; }
 
     private void Start()
     {
@@ -26,6 +28,12 @@ public class Enemigo : MonoBehaviour
        combate.enabled = true;
        mainTarjet = target;
        
+    }
+
+    public  void ActivarPatruya()
+    {
+        combate.enabled=false;
+        patrulla.enabled=true;
     }
 }
 
