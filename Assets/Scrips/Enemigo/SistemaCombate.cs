@@ -11,7 +11,8 @@ public class SistemaCombate : MonoBehaviour
     [SerializeField] NavMeshAgent agent;
     [SerializeField] private float distanciaAtaque = 1.5f; 
     [SerializeField] private Animator animator;
-    
+    private float danhoAtaque;
+
 
     // Start is called before the first frame update
 
@@ -23,6 +24,7 @@ public class SistemaCombate : MonoBehaviour
     }
     private void OnEnable()
     {
+
         agent.speed=velocidadCombate;
         agent.stoppingDistance = distanciaAtaque;
     }
@@ -39,10 +41,14 @@ public class SistemaCombate : MonoBehaviour
         {
             EnfocarObjetivo();
             agent.SetDestination(main.MainTarjet.position);
-            if (agent.remainingDistance <= distanciaAtaque) 
+            if (!agent.pathPending && agent.remainingDistance <= distanciaAtaque) 
             { 
                 animator.SetBool("Atacar",true);
-                main.MainVisual.Atacar();
+                
+            }
+            else
+            {
+                animator.SetBool("Atacar", false);
             }
 
         }
@@ -51,6 +57,17 @@ public class SistemaCombate : MonoBehaviour
             main.ActivarPatruya();
             
         }
+    }
+    #region Ejecutados por eventos de animacion
+    public void Atacar()
+    {
+        //cuando termino animacion me muevo
+        main.MainTarjet.GetComponent<Player>().HacerDanho(danhoAtaque);
+    }
+    private void FinAnimacionAtaque()
+    {
+        animator.SetBool("Atacar", false);
+        agent.isStopped = false;
     }
 
     private void EnfocarObjetivo()
@@ -62,3 +79,4 @@ public class SistemaCombate : MonoBehaviour
     }
     
 }
+#endregion

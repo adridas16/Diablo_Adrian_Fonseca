@@ -5,13 +5,11 @@ using UnityEngine.AI;
 
 public class EnemyVisual : MonoBehaviour
 {
-    private bool ventanaAbierta;
-    [SerializeField] NavMeshAgent agent;
-    Animator anim;
+    
     // Start is called before the first frame update
     private void Awake()
     {
-        anim = GetComponent<Animator>();
+        
     }
     void Start()
     {
@@ -23,11 +21,6 @@ public class EnemyVisual : MonoBehaviour
     {
         
     }
-    public void Atacar()
-    {
-        //cuando termino animacion me muevo
-        anim.SetBool("Atacar", false);
-        agent.isStopped = false;
-    }
+    
     
 }

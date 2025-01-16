@@ -33,7 +33,8 @@ public class SistemaPatrulla : MonoBehaviour
     }
     private void OnEnable()
     {
-        indiceRutaActual = 0;
+        agent.stoppingDistance = 0f;
+        indiceRutaActual--;
         agent.speed = velocidadPatruya;
         //comunico al main que el sistema de patruya soy yo
         StartCoroutine(PatrullasYEsperar());

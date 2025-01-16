@@ -1,4 +1,5 @@
 using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -29,14 +30,18 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Movimiento();
-        if (ultimoClick&& ultimoClick.TryGetComponent(out NPC npc))
+        if (Time.timeScale == 1)
+        {
+
+          Movimiento();
+        }
+        if (ultimoClick&& ultimoClick.TryGetComponent(out IInteractuable interactuable))
         {
             agent.stoppingDistance=distanciaInteraccion;
             if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
             {
                 
-              LanzarInteraccion(npc);
+              LanzarInteraccion(interactuable);
 
                 
             }
@@ -47,9 +52,9 @@ public class Player : MonoBehaviour
         }
        
     }
-    private void LanzarInteraccion(NPC npc)
+    private void LanzarInteraccion(IInteractuable interactuable)
     {
-        npc.Interactuar(this.transform);
+        interactuable.Interactuar(transform);
         ultimoClick = null;
     }
     private void Movimiento()
@@ -70,5 +75,10 @@ public class Player : MonoBehaviour
             }
 
         }
+    }
+
+    public void HacerDanho(float danhoAtaque)
+    {
+        Debug.Log("me hace danho"+danhoAtaque);
     }
 }
