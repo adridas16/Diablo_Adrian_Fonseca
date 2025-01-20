@@ -9,13 +9,18 @@ using UnityEngine.AI;
 public class Player : MonoBehaviour
 {
     // Start is called before the first frame update
-    
+    [SerializeField] private float interaccionAtaque = 2f; 
+    [SerializeField] private float attakingDistance = 2f; 
     [SerializeField] private float distanciaInteraccion;
     private NavMeshAgent agent;
     private Camera cam;
     [SerializeField]private int tiempoInteraccion;
     //Guardo la informacion del NPC actual con el que voy a hablar
     private Transform ultimoClick;
+    private PlayerAnimation playerAnimations;
+
+    public PlayerAnimation PlayerAnimations { get => playerAnimations; set => playerAnimations = value; }
+
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -45,6 +50,10 @@ public class Player : MonoBehaviour
 
                 
             }
+        }
+        else if (ultimoClick && ultimoClick.TryGetComponent(out Enemigo enemigo))
+        {
+
         }
         else if(ultimoClick)
         {
