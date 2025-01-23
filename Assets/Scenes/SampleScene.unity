@@ -13931,7 +13931,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &899194293
 RectTransform:
   m_ObjectHideFlags: 0
@@ -13947,10 +13947,10 @@ RectTransform:
   - {fileID: 828311700}
   m_Father: {fileID: 1045157311}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 121.4459, y: -51.2375}
+  m_SizeDelta: {x: 242.8918, y: 102.475}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &899194294
 MonoBehaviour:
@@ -15639,6 +15639,33 @@ MeshRenderer:
     type: 3}
   m_PrefabInstance: {fileID: 2060269119}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1029650864 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: ce055cfa837ead84e928a795f1751502,
+    type: 3}
+  m_PrefabInstance: {fileID: 1372723544}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1029650865
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1029650864}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 76dbd553db3149b47922ca3e18b3ef99, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &1038802561
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15773,6 +15800,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f674df32201e804b895da8ea69f43dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  eventManager: {fileID: 11400000, guid: f225e6e435c650542abd00d7a7d36911, type: 2}
   marcos: {fileID: 1906710786}
   textoDialogo: {fileID: 991102732}
   npcCamera: {fileID: 827650764}
@@ -18830,6 +18858,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1183288833}
+  - component: {fileID: 1183288834}
   m_Layer: 5
   m_Name: SistemaMisiones
   m_TagString: Untagged
@@ -18857,6 +18886,20 @@ RectTransform:
   m_AnchoredPosition: {x: 141.4, y: -66.9}
   m_SizeDelta: {x: 242.8918, y: 102.475}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1183288834
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1183288832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8c198275e8bbad468c9729b301bad36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventManager: {fileID: 11400000, guid: f225e6e435c650542abd00d7a7d36911, type: 2}
+  toggleMision: {fileID: 899194292}
 --- !u!1001 &1186066957
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22635,12 +22678,12 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: ce055cfa837ead84e928a795f1751502,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 1.123
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ce055cfa837ead84e928a795f1751502,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 17.328085
+      value: 28.63
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ce055cfa837ead84e928a795f1751502,
         type: 3}
@@ -22690,7 +22733,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ce055cfa837ead84e928a795f1751502,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1029650865}
   m_SourcePrefab: {fileID: 100100000, guid: ce055cfa837ead84e928a795f1751502, type: 3}
 --- !u!1001 &1381187970
 PrefabInstance:

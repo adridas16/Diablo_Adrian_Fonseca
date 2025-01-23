@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class SistemaDialogo : MonoBehaviour
 {
+    [SerializeField] private EventManagerSO eventManager;
     //Partron SINGLETON
     //Asegurarte que esta sea la unica instancia de "SistemaDialogo
     //Asegura que esa instancia SEA ACCESIBLE desde cualquier punto del programa
@@ -91,12 +92,17 @@ public class SistemaDialogo : MonoBehaviour
     }
     private void TerminarDialogo()
     {
+        Time.timeScale = 1;
         marcos.SetActive(false);
-        StopAllCoroutines();
         indiceFraseActual = 0;//para posteriores dialogos
         escribiendo = false;
+        StopAllCoroutines();
+        if (dialogoActual.tieneMision)
+        {
+            eventManager.NuevaMision();
+        }
         dialogoActual = null;//ya no tenemos ningun dialogo a no ser que me vuelvan a clicar
-        Time.timeScale = 1;
+
     }
 
 }

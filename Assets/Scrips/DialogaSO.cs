@@ -9,13 +9,7 @@ public class DialogaSO : ScriptableObject
     [TextArea]
     public string[] frases;
     public float tiempoEntreLetras;
-    private void Start()
-    {
-        
-    }
-    private void Update()
-    {
-        
-    }
+    public bool tieneMision;
+    public string textoMision;
 
 }

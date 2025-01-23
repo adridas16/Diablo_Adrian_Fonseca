@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: Dialogo1
   m_EditorClassIdentifier: 
   frases:
-  - "Hello there adventurer and welcome\t"
-  - General kenobi you are telling me i am a adventurer?
-  - Do you like mondongos? what about a banana? What else you are an extrange person
+  - hola aventurero quiero matar a mi padre para heredar todo asi que necesito unas
+    setas venenosas para hacerle un veneneno.
+  - necesito 3 setas para hacerle el venenno cuando me las traigas te pagare.
   tiempoEntreLetras: 0.02
+  tieneMision: 1
+  textoMision: 'Consigue 3 setas de la muerte: (0/3)'

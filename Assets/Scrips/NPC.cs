@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NPC : MonoBehaviour
+public class NPC : MonoBehaviour,IInteractuable
 {
     // Start is called before the first frame update
     [SerializeField] private DialogaSO dialogo;
