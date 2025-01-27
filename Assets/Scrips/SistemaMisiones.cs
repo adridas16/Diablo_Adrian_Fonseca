@@ -5,15 +5,34 @@ using UnityEngine;
 public class SistemaMisiones : MonoBehaviour
 {
     [SerializeField] private EventManagerSO eventManager;
-    [SerializeField] private GameObject toggleMision;
+
+    [SerializeField] private ToggleMision[] toggleMision;
     // Start is called before the first frame update
     private void OnEnable()
     {
         eventManager.OnNuevaMision += ActivarToogleMision;
+        eventManager.OnActualizarMision += ActualizarToggle;
+        eventManager.OnTerminarMision += FinalizarMisionToggle;
     }
 
-    private void ActivarToogleMision()
+
+    private void ActivarToogleMision(MisionSO mision)
     {
-       toggleMision.SetActive(true);
+        toggleMision[mision.indiceMision].TextoMision.text = mision.ordenInicial;
+        if (mision.repeticion)
+        {
+            toggleMision[mision.indiceMision].TextoMision.text = mision.ordenInicial+=" ("+mision.estadoActual+"/"+ mision.repeticionesTotales+")";
+        }
+        toggleMision[mision.indiceMision].gameObject.SetActive(true);
+    }
+    private void ActualizarToggle(MisionSO mision)
+    {
+         
+    }
+    private void FinalizarMisionToggle(MisionSO mision)
+    {
+        //marcar el toggle como true;
+        toggleMision[mision.indiceMision].Toggle.isOn = true;
+        toggleMision[mision.indiceMision].TextoMision.text=mision.ordenInicial;
     }
 }
