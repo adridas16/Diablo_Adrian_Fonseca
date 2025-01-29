@@ -21,18 +21,20 @@ public class SistemaMisiones : MonoBehaviour
         toggleMision[mision.indiceMision].TextoMision.text = mision.ordenInicial;
         if (mision.repeticion)
         {
-            toggleMision[mision.indiceMision].TextoMision.text = mision.ordenInicial+=" ("+mision.estadoActual+"/"+ mision.repeticionesTotales+")";
+            toggleMision[mision.indiceMision].TextoMision.text +=" ("+mision.estadoActual+"/"+ mision.repeticionesTotales+")";
         }
         toggleMision[mision.indiceMision].gameObject.SetActive(true);
     }
     private void ActualizarToggle(MisionSO mision)
     {
-         
+        //actualizar el texto de la mision correspondiente
+        toggleMision[mision.indiceMision].TextoMision.text = mision.ordenInicial;
+        toggleMision[mision.indiceMision].TextoMision.text += " (" + mision.estadoActual + "/" + mision.repeticionesTotales + ")";
     }
     private void FinalizarMisionToggle(MisionSO mision)
     {
         //marcar el toggle como true;
         toggleMision[mision.indiceMision].Toggle.isOn = true;
-        toggleMision[mision.indiceMision].TextoMision.text=mision.ordenInicial;
+        toggleMision[mision.indiceMision].TextoMision.text = mision.ordenFinal;
     }
 }

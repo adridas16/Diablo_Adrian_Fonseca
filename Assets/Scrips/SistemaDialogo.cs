@@ -13,7 +13,7 @@ public class SistemaDialogo : MonoBehaviour
     public static SistemaDialogo sistema;
     [SerializeField] private GameObject marcos;
     [SerializeField] private TMP_Text textoDialogo;
-    private DialogaSO dialogoActual; //para almacenar que o con que dialogo estamos trabajando
+    private DialogaSO dialogo; //para almacenar que o con que dialogo estamos trabajando
     [SerializeField] Transform npcCamera;
 
     private bool escribiendo; //Determina si el sistema esta escribiendo o no
@@ -45,7 +45,7 @@ public class SistemaDialogo : MonoBehaviour
         
         Time.timeScale = 0; //pausamos el juego
         //el dialogo actual con el que trabajamos es el que me dan por parametro de entrada
-        dialogoActual = dialogo;
+        this.dialogo = dialogo;
         marcos.SetActive(true);
         StartCoroutine(EscribirFrase());
         
@@ -55,12 +55,12 @@ public class SistemaDialogo : MonoBehaviour
     {
         escribiendo = true;
         textoDialogo.text = "";
-        char[]fraseEnLetras = dialogoActual.frases[indiceFraseActual].ToCharArray();
+        char[]fraseEnLetras = dialogo.frases[indiceFraseActual].ToCharArray();
         foreach (char letra in fraseEnLetras) 
         {
             textoDialogo.text += letra;
             
-            yield return new WaitForSecondsRealtime(dialogoActual.tiempoEntreLetras);
+            yield return new WaitForSecondsRealtime(dialogo.tiempoEntreLetras);
         }
         escribiendo = false;
     }
@@ -73,7 +73,7 @@ public class SistemaDialogo : MonoBehaviour
         else
         {
             indiceFraseActual++;//avanzo de indice de frase 
-            if(indiceFraseActual < dialogoActual.frases.Length)
+            if(indiceFraseActual < dialogo.frases.Length)
             {
                StartCoroutine(EscribirFrase()); //la escribe
             }
@@ -87,7 +87,7 @@ public class SistemaDialogo : MonoBehaviour
     private void CompletarFrase()
     {
         StopAllCoroutines();
-        textoDialogo.text = dialogoActual.frases[indiceFraseActual];
+        textoDialogo.text = dialogo.frases[indiceFraseActual];
         escribiendo=false;
     }
     private void TerminarDialogo()
@@ -97,12 +97,12 @@ public class SistemaDialogo : MonoBehaviour
         indiceFraseActual = 0;//para posteriores dialogos
         escribiendo = false;
         StopAllCoroutines();
-        if (dialogoActual.tieneMision)
+        if (dialogo.tieneMision)
         {
             //comunico al eventManager que hay una mision en este dialogo 
-            eventManager.NuevaMision(dialogoActual.mision);
+            eventManager.NuevaMision(dialogo.mision);
         }
-        dialogoActual = null;//ya no tenemos ningun dialogo a no ser que me vuelvan a clicar
+        dialogo = null;//ya no tenemos ningun dialogo a no ser que me vuelvan a clicar
 
     }
 

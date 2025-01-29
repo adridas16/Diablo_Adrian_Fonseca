@@ -9,11 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 14daaa405798ff34c9d1029c0119552f, type: 3}
-  m_Name: Mision0
+  m_Script: {fileID: 11500000, guid: aef420008c47fd842a6d1d47fe7ecab7, type: 3}
+  m_Name: dialogo2
   m_EditorClassIdentifier: 
-  ordenInicial: Recoge setas de la muerte
-  ordenFinal: Vuelve con Angela
-  repeticion: 1
-  repeticionesTotales: 3
-  indiceMision: 0
+  frases:
+  - tienes mis setas estoy contenta
+  tiempoEntreLetras: 0.02
+  tieneMision: 0
+  mision: {fileID: 0}
