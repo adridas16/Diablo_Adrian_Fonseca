@@ -6,18 +6,21 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour,IDanhable
 {
     // Start is called before the first frame update
     [SerializeField] private float interaccionAtaque = 2f; 
     [SerializeField] private float attakingDistance = 2f; 
     [SerializeField] private float distanciaInteraccion;
+    [SerializeField] private float danhoAtaque;
+    [SerializeField] private float vidas;
     private NavMeshAgent agent;
     private Camera cam;
     [SerializeField]private int tiempoInteraccion;
     //Guardo la informacion del NPC actual con el que voy a hablar
     private Transform ultimoClick;
     private PlayerAnimation playerAnimations;
+    private Transform TargetActual;
 
     public PlayerAnimation PlayerAnimations { get => playerAnimations; set => playerAnimations = value; }
 
@@ -35,12 +38,12 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Time.timeScale == 1)
+        if (Time.timeScale == 1 && vidas>0)
         {
 
           Movimiento();
         }
-        if (ultimoClick&& ultimoClick.TryGetComponent(out IInteractuable interactuable))
+        if (Time.timeScale == 1 && vidas >0 && ultimoClick && ultimoClick.TryGetComponent(out IInteractuable interactuable))
         {
             agent.stoppingDistance=distanciaInteraccion;
             if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
@@ -51,9 +54,16 @@ public class Player : MonoBehaviour
                 
             }
         }
-        else if (ultimoClick && ultimoClick.TryGetComponent(out Enemigo enemigo))
+        else if (Time.timeScale == 1 && vidas > 0 && ultimoClick && ultimoClick.TryGetComponent(out IDanhable _))
         {
-
+            TargetActual = ultimoClick;
+            agent.stoppingDistance = attakingDistance;
+            if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
+            {
+                FaceTarget();
+                playerAnimations.EjecutarAtaque();
+            }
+            
         }
         else if(ultimoClick)
         {
@@ -86,8 +96,23 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void HacerDanho(float danhoAtaque)
+    public void Atacar()
     {
-        Debug.Log("me hace danho"+danhoAtaque);
+        TargetActual.GetComponent<Enemigo>().RecibirDanho(danhoAtaque);
+    }
+    private void FaceTarget()
+    {
+        Vector3 directionToTarget = (TargetActual.transform.position - transform.position).normalized;
+        directionToTarget.y = 0f;
+        Quaternion rotationToTarget = Quaternion.LookRotation(directionToTarget);
+        transform.rotation = rotationToTarget;
+    }
+    public void RecibirDanho(float danho)
+    {
+        vidas -= danho;
+        if (vidas <= 0)
+        {
+            playerAnimations.EjecutarAnimacionMuerte();
+        }
     }
 }

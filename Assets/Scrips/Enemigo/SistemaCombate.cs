@@ -11,7 +11,7 @@ public class SistemaCombate : MonoBehaviour
     [SerializeField] NavMeshAgent agent;
     [SerializeField] private float distanciaAtaque = 1.5f; 
     [SerializeField] private Animator animator;
-    private float danhoAtaque;
+    [SerializeField] private float danhoAtaque;
 
 
     // Start is called before the first frame update
@@ -62,7 +62,7 @@ public class SistemaCombate : MonoBehaviour
     public void Atacar()
     {
         //cuando termino animacion me muevo
-        main.MainTarjet.GetComponent<Player>().HacerDanho(danhoAtaque);
+        main.MainTarjet.GetComponent<Player>().RecibirDanho(danhoAtaque);
     }
     private void FinAnimacionAtaque()
     {

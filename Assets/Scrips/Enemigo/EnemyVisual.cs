@@ -7,19 +7,28 @@ public class EnemyVisual : MonoBehaviour
 {
     
     // Start is called before the first frame update
-    private void Awake()
-    {
-        
-    }
+    [SerializeField] private Enemigo main;
+    [SerializeField] private NavMeshAgent agent;
+
+    private Animator anim;
+
+   
+
+    // Start is called before the first frame update
     void Start()
     {
-        
+        anim = GetComponent<Animator>();
+        main.EnemigoVisual = this;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        anim.SetFloat("velocity", agent.velocity.magnitude / agent.speed);
+    }
+    public void EjecutarAnimacionMuerte()
+    {
+        anim.SetTrigger("death");
     }
     
     

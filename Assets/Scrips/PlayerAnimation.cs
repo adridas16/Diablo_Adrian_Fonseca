@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerAnimation : MonoBehaviour
 {
     private Animator anim;
-    private Player main;
+    [SerializeField] private Player main;
     // Start is called before the first frame update
     private void Awake()
     {
@@ -22,6 +22,10 @@ public class PlayerAnimation : MonoBehaviour
     {
         
     }
+    void GenerarAtaque()
+    {
+        main.Atacar();
+    }
     public void EjecutarAtaque()
     {
         anim.SetBool("attaking",true);
@@ -29,6 +33,9 @@ public class PlayerAnimation : MonoBehaviour
     public void PararAtaque()
     {
         anim.SetBool("attaking", false);
-        anim.SetBool("attaking", false);
+    }
+    public void EjecutarAnimacionMuerte()
+    {
+        anim.SetBool("muerte", true);
     }
 }
