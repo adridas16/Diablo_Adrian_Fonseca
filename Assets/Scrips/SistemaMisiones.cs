@@ -7,6 +7,7 @@ public class SistemaMisiones : MonoBehaviour
     [SerializeField] private EventManagerSO eventManager;
 
     [SerializeField] private ToggleMision[] toggleMision;
+    [SerializeField] private GameObject salida;
     // Start is called before the first frame update
     private void OnEnable()
     {
@@ -33,8 +34,10 @@ public class SistemaMisiones : MonoBehaviour
     }
     private void FinalizarMisionToggle(MisionSO mision)
     {
+        salida.SetActive(false);
         //marcar el toggle como true;
         toggleMision[mision.indiceMision].Toggle.isOn = true;
         toggleMision[mision.indiceMision].TextoMision.text = mision.ordenFinal;
+        
     }
 }

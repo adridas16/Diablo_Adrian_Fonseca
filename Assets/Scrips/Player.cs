@@ -21,7 +21,10 @@ public class Player : MonoBehaviour,IDanhable
     private Transform ultimoClick;
     private PlayerAnimation playerAnimations;
     private Transform TargetActual;
-
+    [SerializeField] private GameObject muerteCan;
+    [SerializeField] private float timerM=3;
+    bool muerto=false;
+    [SerializeField] private GameObject Fin;
     public PlayerAnimation PlayerAnimations { get => playerAnimations; set => playerAnimations = value; }
 
     private void Awake()
@@ -38,9 +41,10 @@ public class Player : MonoBehaviour,IDanhable
     // Update is called once per frame
     void Update()
     {
+        muerte();
         if (Time.timeScale == 1 && vidas>0)
         {
-
+            
           Movimiento();
         }
         if (Time.timeScale == 1 && vidas >0 && ultimoClick && ultimoClick.TryGetComponent(out IInteractuable interactuable))
@@ -64,11 +68,14 @@ public class Player : MonoBehaviour,IDanhable
                 playerAnimations.EjecutarAtaque();
             }
             
+            
         }
         else if(ultimoClick)
         {
-            agent.stoppingDistance = 0f;    
+            agent.stoppingDistance = 0f;
+            playerAnimations.PararAtaque();
         }
+        
        
     }
     private void LanzarInteraccion(IInteractuable interactuable)
@@ -112,7 +119,33 @@ public class Player : MonoBehaviour,IDanhable
         vidas -= danho;
         if (vidas <= 0)
         {
+            muerto=true;
             playerAnimations.EjecutarAnimacionMuerte();
+            
+           
+           
+        }
+    }
+    private void muerte()
+    {
+        if (vidas<=0)
+        {
+            timerM -= Time.unscaledDeltaTime;
+        }
+        if (timerM <= 0)
+        {
+            vidas = 100;
+            timerM = 1;
+            muerteCan.SetActive(true);
+            Time.timeScale = 0;
+        }
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("FinDelJuego") && Time.timeScale == 1)
+        {
+            Fin.SetActive(true);
+            Time.timeScale = 0;
         }
     }
 }

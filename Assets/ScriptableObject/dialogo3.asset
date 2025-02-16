@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: dialogo3
   m_EditorClassIdentifier: 
   frases:
-  - aaaaaaa
+  - Sal de la mazmorra
   tiempoEntreLetras: 0
   tieneMision: 0
-  mision: {fileID: 0}
+  mision: {fileID: 11400000, guid: 33fa9549d281cad40ac758c749850179, type: 2}

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: dialogo2
   m_EditorClassIdentifier: 
   frases:
-  - tienes mis setas estoy contenta
+  - Tienes mis setas muchas gracias ya puedes salir de la mazmorra.
   tiempoEntreLetras: 0.02
-  tieneMision: 0
-  mision: {fileID: 0}
+  tieneMision: 1
+  mision: {fileID: 11400000, guid: 33fa9549d281cad40ac758c749850179, type: 2}

@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: Mision0 1
   m_EditorClassIdentifier: 
   ordenInicial: Escapa de la mazmorra
-  ordenFinal: Te lo has pasado
+  ordenFinal: 
   repeticion: 0
-  repeticionesTotales: 3
-  estadoActual: 0
+  repeticionesTotales: 0
   indiceMision: 1

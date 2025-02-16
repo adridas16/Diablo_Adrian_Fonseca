@@ -46,10 +46,8 @@ public class Enemigo : MonoBehaviour, IDanhable
         patrulla.enabled=true;
     }
     public void RecibirDanho(float danho)
-    {
-        if (muerto) return;
-
-        vidasActuales -= danho;
+    {   
+        vidasActuales -= 25;
         healthBar.fillAmount = vidasActuales / vidasIniciales;
         if (vidasActuales <= 0)
         {
