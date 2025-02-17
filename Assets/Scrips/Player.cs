@@ -66,6 +66,7 @@ public class Player : MonoBehaviour,IDanhable
             {
                 FaceTarget();
                 playerAnimations.EjecutarAtaque();
+                
             }
             
             
@@ -106,6 +107,7 @@ public class Player : MonoBehaviour,IDanhable
     public void Atacar()
     {
         TargetActual.GetComponent<Enemigo>().RecibirDanho(danhoAtaque);
+        
     }
     private void FaceTarget()
     {
@@ -121,9 +123,6 @@ public class Player : MonoBehaviour,IDanhable
         {
             muerto=true;
             playerAnimations.EjecutarAnimacionMuerte();
-            
-           
-           
         }
     }
     private void muerte()

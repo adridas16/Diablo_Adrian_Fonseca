@@ -12,10 +12,9 @@ public class Enemigo : MonoBehaviour, IDanhable
     private SistemaCombate combate;
     private SistemaPatrulla patrulla;
     Transform mainTarjet;
-    EnemyVisual mainVisual;
     [SerializeField] private float vidasActuales;
     private bool muerto;
-    EnemyVisual enemigoVisual;
+    [SerializeField] private EnemyVisual enemigoVisual;
     [SerializeField] private GameObject localcanvas;
     [SerializeField] private float vidasIniciales;
     [SerializeField] private Image healthBar;
@@ -23,8 +22,7 @@ public class Enemigo : MonoBehaviour, IDanhable
     public SistemaCombate Combate { get => combate; set => combate = value; }
     public SistemaPatrulla Patrulla { get => patrulla; set => patrulla = value; }
     public Transform MainTarjet { get => mainTarjet; }
-    public EnemyVisual MainVisual { get => mainVisual; set => mainVisual = value; }
-    public EnemyVisual EnemigoVisual { get => enemigoVisual; set => enemigoVisual = value; }
+    
 
     private void Start()
     {
@@ -53,6 +51,7 @@ public class Enemigo : MonoBehaviour, IDanhable
         {
             muerto = true;
             Muerte();
+            enemigoVisual.MuerteAnim();
         }
     }
     private void Muerte()
@@ -62,7 +61,6 @@ public class Enemigo : MonoBehaviour, IDanhable
         Destroy(combate);
         Destroy(patrulla.gameObject);
         Destroy(gameObject, 5);
-        enemigoVisual.EjecutarAnimacionMuerte();
     }
     private void OnMouseEnter()
     {

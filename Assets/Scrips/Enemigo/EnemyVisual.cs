@@ -18,7 +18,7 @@ public class EnemyVisual : MonoBehaviour
     void Start()
     {
         anim = GetComponent<Animator>();
-        main.EnemigoVisual = this;
+        
     }
 
     // Update is called once per frame
@@ -26,9 +26,10 @@ public class EnemyVisual : MonoBehaviour
     {
         anim.SetFloat("velocity", agent.velocity.magnitude / agent.speed);
     }
-    public void EjecutarAnimacionMuerte()
+    public void MuerteAnim()
     {
-        anim.SetTrigger("death");
+        anim.SetTrigger("Muerte");
+       
     }
     
     
